@@ -1,14 +1,74 @@
 html, body {
 	height: 100%; 
 	width: 100%; 
-	font-family: Arial, Helvetica, sans-serif;
+	font-family: 'Mukta', ;
+
 }
 
+.navbar {
+
+	padding: 0 20px 0 20px; 
+	// flex-wrap: wrap;
+
+
+	.navbar-brand  {
+		text-align: center;
+		font-size: 25px;
+		font-weight: 700;
+		text-transform: uppercase;
+		position: absolute; 
+		left: 50%; 
+		margin-left: -100px; 
+		margin-top: 0; 
+		padding: 0; 
+		height: 100%; 
+		display: flex; 
+		align-items: center;
+		width: 100%;
+	}
+
+	.navbar-brand {
+		justify-content: space-between;
+	}
+
+	#womens-dropdown {
+		width: 1390px;
+		border-top: solid 3px rgb(253, 234, 198);
+	}
+
+}
+
+	.footer-title {
+			color: white; 
+			font-size: 20px;
+			font-weight: 800;
+		}
+
+		.footer-subtitle {
+				color: white;
+				font-size: 15px;
+			}
+		
+		.footer-subtitle:hover {
+			color: rgb(209, 209, 209);
+			font-size: 15px;
+		}
+
+
+
 .home-section {
+
+	.bDElFG, .eDOvDv, .kATXlE, .brrKeP, .fGPkxk, .fGPkxk {
+		background-color: black;
+	}
 
 	.sign-up {
 		text-align: center;
 		margin-top: 40px;
+		text-transform: uppercase;
+		font-weight: 700;
+		color: black;
+		text-decoration: underline;
 	}
 
 	.banner {
@@ -21,14 +81,23 @@ html, body {
 		flex-direction: column;
 		align-items: center;
 		justify-content: center;
-		border: 1px solid blue; 
+		// border: 5px solid black; 
+		background-image: url('https://www.dlf.pt/png/big/20/207673_texture-png.jpg');
 		margin: 10px;
 		height: 200px;
 	}
 
 	.shop-button {
 		border: 1px solid black;
-		box-shadow: 10px 10px paleturquoise;
+		box-shadow: 10px 10px rgb(253, 234, 198);
+		padding: 8px;
+		text-decoration: none;
+		color: black;
+		background-color: white;
+	}
+
+	.shop-button:hover {
+		transform: scale(1.15);
 	}
 
 
@@ -48,13 +117,29 @@ html, body {
 				box-shadow: 5px 5px black;
 			}
 	
-	}
-
-	
+		}
 }
 
 
 @media only screen and (max-width: 480px) { 
+
+	.navbar {
+		padding: 0px;
+		width: 100%;
+	
+
+	.navbar-brand {
+		display: flex;
+		align-items: flex-start;
+		justify-content: flex-start;
+		left: 26%;
+		margin-top: 10px;
+	}
+
+	#womens-title {
+		margin-top: 40px;
+	}
+}
 
 	.home-section {
 

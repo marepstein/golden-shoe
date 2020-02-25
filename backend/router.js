@@ -2,7 +2,7 @@ const router = require('express').Router()
 const users = require('./controllers/users')
 const secureRoute = require('./lib/secureRoute')
 const products = require('./controllers/Products')
-const cart = require('./controllers/Cart')
+// const cart = require('./controllers/Cart')
 // const admin = require('./controllers/admin')
 
 
@@ -28,11 +28,11 @@ router.route('/profile')
 // router.route('/user-data')
 //   .get(users.readUserData)
 	
-router.route('/user-data/cart')
-  .post(users.addToCart)
+// router.route('/user-data/cart')
+//   .post(users.addToCart)
 
-router.route('/user-data/cart/:id')
-  .delete(users.removeFromCart)
+// router.route('/user-data/cart/:id')
+//   .delete(users.removeFromCart)
 
 router.route('/profile/edit')
   .put(secureRoute, users.edit)

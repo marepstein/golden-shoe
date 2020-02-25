@@ -1,11 +1,8 @@
 import React from 'react'
+import { Link, withRouter } from 'react-router-dom'
 import { Slide } from 'react-slideshow-image'
+import CustomChatbot from './chatbot/customChatbot'
 
-const slideImages = [
-  'https://www.crockettandjones.com/wordpress/wp-content/uploads/2017/03/origins-of-shoe-styles-banner-1.jpg',
-  'https://jennardor.com/image/catalog/shoes3/2-new.png',
-  'images/slide_4.jpg'
-]
 
 const properties = {
   duration: 5000,
@@ -39,7 +36,7 @@ const Home = () => {
               <h1>Delivery & Returns Policy</h1>
             </div>
           </Slide> */}
-						<h1>Sign up and receive £10 off your first order</h1>
+          <div className="sign-up"><Link to="/register" style={{ color: 'rgb(0, 0, 0)' }}>Sign up and receive £10 off your first order</Link></div>
         </div>
       </div>
     </div>
@@ -67,16 +64,18 @@ const Home = () => {
         <div className="columns is-multiline">
           <div className="column" id="home-column">
             <div className="title">Womens</div>
-            <button className="shop-button">Shop Now</button>
+            <Link className="shop-button">Shop Now</Link>
           </div>
           <div className="column" id="home-column">
             <div className="title">Mens</div>
-            <button className="shop-button">Shop Now</button>
+            <Link className="shop-button" to="/mens">Shop Now</Link>
           </div>
         </div>
       </div>
     </div>
+    <CustomChatbot />
   </div>
+  
 }
 
 
