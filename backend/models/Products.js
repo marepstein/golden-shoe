@@ -15,15 +15,20 @@ const productSchema = new mongoose.Schema({
   name: { type: String, required: true }, 
   productCode: { type: String, required: true }, 
   image: { type: String, required: true },
-  colours: { type: [String], required: true }, 
+  colour: { type: String, required: true }, 
   size: { type: String, required: true },
-  status: { type: String, required: true },
-  productDescription: { type: String, required: true },
+  quantity: { type: Number, required: true },
+  sold: { type: Number, default: 0 }, 
+  // status: { type: String, required: true },
+  productDescription: { type: String, required: true, maxlength: 2000 },
   category: { type: [String], required: true },
   price: { type: String, required: true },
   user: { type: mongoose.Schema.ObjectId, ref: 'User', required: true },
-  reviews: [ reviewSchema ] 
+  reviews: [ reviewSchema ]
+}, {
+  timestamps: true
 })
+
 
 productSchema.plugin(uniqueValidator)
 

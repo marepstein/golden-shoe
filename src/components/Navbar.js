@@ -3,6 +3,7 @@ import { Link, withRouter } from 'react-router-dom'
 import axios from 'axios'
 import Auth from '../lib/auth'
 import UserContext from './UserContext'
+import { itemTotal } from './CartFunctions'
 
 
 const errorInitialState = {
@@ -49,41 +50,6 @@ const Navbar = () => {
   //   setSearchModal(!searchModal)
   // }
 	
-  // function handleSearch
-
-  // const categories = initialProductData.map((elem) => {
-  //   return elem.category.filter((el) => {
-  //     return el.includes('Heels')
-  //   })
-  // })
-	
-
-  const filtered = initialProductData.filter((product) => {
-    return product['category'].some(function(category) {
-      return category.product === 'Womens'
-    })
-	})
-	
-	const womens = initialProductData.filter(product => product.category === 'Womens')
-
-  // function filter (initialProductData) {
-  //   return initialProductData.map((elem) => {
-  //     return elem.category === 'Womens'
-  //   })
-  // }
-	
-  // var filtered = initialProductData.filter(filter)
-
-  // const categories = initialProductData.filter((el) => {
-  //   return el.includes('Heels')
-  // })
-	
-  console.log(womens)
-	
-  // {
-  // 	return categories.some(element => item.category.includes('Womens'))
-  // })
-	
  
 
   return <nav className="navbar is-white is-fixed-top" role="navigation" aria-label="main navigation">
@@ -105,22 +71,22 @@ const Navbar = () => {
             <div className="columns is-multiline">
               <div className="column">
                 <div className="title" style={{ marginLeft: 10, textTransform: 'uppercase' }}>Categories</div>
-                <Link className="navbar-item">All</Link>
-                <Link className="navbar-item">Heels</Link>
+                <Link className="navbar-item" to="/womens">All</Link>
+                {/* <Link className="navbar-item">Heels</Link>
                 <Link className="navbar-item">Trainers</Link>
                 <Link className="navbar-item">Boots</Link>
                 <Link className="navbar-item">Flats</Link>
                 <Link className="navbar-item">Sandals</Link>
                 <Link className="navbar-item">Pumps</Link>
                 <Link className="navbar-item">Slippers</Link>
-                <Link className="navbar-item">Loafers</Link>
+                <Link className="navbar-item">Loafers</Link> */}
               </div>
               <div className="column">
                 <div className="title" style={{ marginLeft: 10, textTransform: 'uppercase' }}>Trends</div>
-                <Link className="navbar-item">Most Loved</Link>
+                {/* <Link className="navbar-item">Most Loved</Link>
                 <Link className="navbar-item">Night Out</Link>
                 <Link className="navbar-item">Sporty</Link>
-                <Link className="navbar-item">Summer</Link>
+                <Link className="navbar-item">Summer</Link> */}
               </div>
             </div>
           </div>
@@ -135,13 +101,13 @@ const Navbar = () => {
           </Link>
         </div>
         <div className="navbar-item has-dropdown is-hoverable">
-          <Link className="navbar-link is-arrowless" to="/mens">
+          <Link className="navbar-link is-arrowless" to="/sale">
             Sale
           </Link>
         </div>
         <div className="navbar-item has-dropdown is-hoverable">
-          <Link className="navbar-link is-arrowless" to="/mens">
-            About
+          <Link className="navbar-link is-arrowless" to="/returns">
+            Returns
           </Link>
         </div>
       </div>
@@ -173,8 +139,11 @@ const Navbar = () => {
           
        
         {/* <div className="navbar-item has-dropdown is-hoverable"> */}
-        <Link className="navbar-link is-arrowless" to="/mens">
-            Cart (0)
+        <Link className="navbar-link is-arrowless" to="/cart">
+            Cart 
+          <sup>
+            <small className="cart-badge">({itemTotal()})</small>
+          </sup>
         </Link>
         {/* </div> */}
         <div className="navbar-item has-dropdown is-hoverable">

@@ -7,15 +7,15 @@ const userSchema = new mongoose.Schema({
   username: { type: String, required: true, unique: true },
   email: { type: String, required: true, unique: true },
   password: { type: String, required: true },
-  isAdmin: { type: Boolean },
+  role: { type: String, default: 0, required: true },
   //---------------------------------
   //user additions ------------------
   favourites: { type: [Object] }, 
-  orderHistory: { type: [Object] }, 
-  shippingAdresses: { type: [Object] }, 
-  billingAdresses: { type: [Object] }, 
-  billingDetails: { type: [Object] }, 
-  cart: { type: [Object] }
+  orderHistory: { type: [Object], default: [] }
+  // shippingAdresses: { type: [Object] }, 
+  // billingAdresses: { type: [Object] }, 
+  // billingDetails: { type: [Object] }, 
+  // cart: { type: [Object] }
   //---------------------------------
 }, {
   timestamps: true,

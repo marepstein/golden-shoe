@@ -1,10 +1,15 @@
 const express = require('express')
 const mongoose = require('mongoose')
 const bodyParser = require('body-parser')
-const cors = require('cors')
+// const cors = require('cors')
 const { dbURI, port } = require('./config/environment')
-const router = require('./router')
 const errorHandler = require('./lib/errorHandler')
+
+// const authRouter = require('./routes/auth')
+const userRouter = require('./routes/user')
+const productsRouter = require('./routes/products')
+const router = require('./router')
+
 
 // Connecting to mongoose
 mongoose.connect(dbURI,
@@ -16,14 +21,15 @@ const app = express()
 
 // Middleware
 app.use(bodyParser.json())
-app.use(cors())
+// app.use(cors())
 
 app.use((req, resp, next) => {
   console.log(`${req.method} to ${req.url}`)
   next()
 })
 
-app.use('/api', router)
+app.use('/api', userRouter)
+app.use('/api', productsRouter)
 
 app.use(errorHandler)
 

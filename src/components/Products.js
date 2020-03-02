@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import axios from 'axios'
 import { Link } from 'react-router-dom'
+import WomensCard from './WomensCard'
 
 const errorInitialState = {
   error: ''
@@ -20,24 +21,24 @@ const Products = () => {
       .catch(err => setError({ errors: err.response.status }))
   }, [])
 	
-
-  // const womens = initialProductData.map((elem) => {
-  //   return elem.category.filter((el) => {
-  //     return el.includes('Womens')
-  //   })
-  // })
+  const womens = productData.filter(product => {
+    return product.category.includes('Womens')
+  })
 	
+
+  // console.log(womens)
 
   return <div className="section">
     <div className="container">
       <div className='columns is-mobile is-multiline'>
-		
-        {productData.map((elem, i) => {
-          return <div className="column" key={i} value={elem}>{elem}</div>
+        {/* <div className="column is-one-quarter-desktop"> */}
+        {womens.map((results, i) => {
+          return <WomensCard className="card" key={i} results={results} />
         })}
       </div>
     </div>
   </div>
+
 
 
 }

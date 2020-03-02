@@ -16,7 +16,6 @@ const errorInitialState = {
 const Register = (props) => {
 
   const [form, updateForm] = useState(formInitialState)
-
   const [error, setError] = useState(errorInitialState)
 
   function handleInput(e) {
@@ -37,6 +36,7 @@ const Register = (props) => {
       .catch((err) => {
         setError({ errors: err.response.data })
         console.log(error)
+        console.log(form)
       })
   }
 

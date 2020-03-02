@@ -1,6 +1,5 @@
 const Product = require('../models/Products')
 
-
 // function create(req, res) {
 //   req.body.user = req.currentUser
 //   Product
@@ -9,15 +8,32 @@ const Product = require('../models/Products')
 //     .catch(err => console.log(err))
 // }
 
+function productById (req, res, next) {
+  Product
+    .findById(req.params.id)
+    .then(product => {
+      if (!product) 
+        return res.status(400).json({ message: 'Product not found' })
+      else res.status(200).json(product)
+      next()
+    })
+    .catch(err => console.log(err))
+}
+
 function index(req, res) {
+
+  // const order = req.query.order ? req.query.order : 'asc'
+  // const sortBy = req.query.sortBy ? req.query.sortBy : '_id'
+
   Product
     .find()
     .populate('user')
+    // .sort([[sortBy, order]])
     .then(products => res.status(200).json(products))
     .catch(err => console.log(err))
 }
 
-function show(req, res) {
+function show(req, res,) {
   Product
     .findById(req.params.id)
     .then(product => {
@@ -57,10 +73,18 @@ function deleteReview(req, res) {
 }
 
 
+/*** If we want to return to customers most popular and new arrivals 
+ by quantity sold: /products?sortBy=sold&order=desc&limit=4
+ by new: /products?sortBy=createdAt&order=desc&limit=4
+ BUT if no params are sent i.e. just /products -- then return all
+***/
+
+
 module.exports = {
   // create,
   index,
   show, 
+  productById,
   createReview,
   deleteReview
 }

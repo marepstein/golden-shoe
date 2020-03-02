@@ -1,7 +1,7 @@
 import React from 'react'
 import { Link, withRouter } from 'react-router-dom'
 import { Slide } from 'react-slideshow-image'
-import CustomChatbot from './chatbot/customChatbot'
+import CustomChatbot from './customChatbot'
 
 
 const properties = {
@@ -13,14 +13,14 @@ const properties = {
   height: '100vh'
 }
 
-const propertiesTwo = {
-  duration: 5000,
-  transitionDuration: 500,
-  infinite: true,
-  indicators: false,
-  arrows: false,
-  height: '100vh'
-}
+// const propertiesTwo = {
+//   duration: 5000,
+//   transitionDuration: 500,
+//   infinite: true,
+//   indicators: false,
+//   arrows: false,
+//   height: '100vh'
+// }
 
 const Home = () => {
 
@@ -52,11 +52,6 @@ const Home = () => {
             <div className="slide-overlay"><button>Shop Womens New</button></div>
           </div>
         </div>
-        {/* <div className="each-slide">
-          <div style={{ 'backgroundImage': `url(${slideImages[2]})` }}>
-            <span>Slide 3</span>
-          </div>
-        </div> */}
       </Slide>
     </div>
     <div className="section">

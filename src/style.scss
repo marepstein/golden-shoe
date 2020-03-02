@@ -36,6 +36,10 @@ html, body {
 		border-top: solid 3px rgb(253, 234, 198);
 	}
 
+	.cart-badge {
+		margin: 5px;
+	}
+
 }
 
 	.footer-title {
@@ -120,6 +124,45 @@ html, body {
 		}
 }
 
+.stripecontainer {
+  margin: 10%;
+  border: 1px solid #ddd;
+  background-color: #fff;
+  border-radius: 4px 4px 0 0;
+  padding: 20px;
+}
+.bg-danger{
+     margin: -20px;
+  p{
+    padding: 20px;
+  }
+}
+.bg-info{
+  padding: 10px;
+  text-align: center;
+}
+.center {
+  text-align: center;
+}
+
+fieldset {
+  clear: both;
+  border-bottom: 1px solid lightgrey;
+  margin: 20px -20px;
+  padding: 20px 0;
+}
+
+.disabled {
+  background: lightgrey;
+}
+
+.center {
+  text-align: center;
+}
+
+small {
+  font-size: 0.8em;
+}
 
 @media only screen and (max-width: 480px) { 
 
