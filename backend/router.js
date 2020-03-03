@@ -1,45 +1,20 @@
-// const router = require('express').Router()
-// const users = require('./controllers/user')
-// const secureRoute = require('./lib/secureRoute')
-// // const products = require('./controllers/Products')
-// // const cart = require('./controllers/Cart')
-// // const admin = require('./controllers/admin')
+const router = require('express').Router()
+const secureRoute = require('./lib/secureRoute')
+const products = require('./controllers/Products')
+const users = require('./controllers/user')
 
+router.route('/products').get(products.index)
 
-// // router.route('/products')
-// //   .get(products.index)
-// //   // .post(secureRoute, products.create)
-	
-// // router.route('/products/:id')
-// //   .get(products.show)
-//   // .put(secureRoute, products.update)
-//   // .delete(secureRoute, products.remove)
-	
-// // router.route('/products')
-// //   .post(admin.createProduct)
+router.route('/products/purchase').patch(products.purchaseProducts)
 
-// // router.route('/products/:id')
-// //   .put(admin.updateProduct)
-// //   .delete(admin.deleteProduct)
+router.route('/products/:id').get(products.show)
 
-// // router.route('/profile')
-// //   .get(secureRoute, users.show)
+router.route('/profile').get(secureRoute, users.show)
 
-// // router.route('/profile/edit')
-// //   .put(secureRoute, users.edit)
+router.route('/profile/edit').put(secureRoute, users.edit)
 
-// // router.route('/register')
-// //   .post(users.register)
+router.route('/register').post(users.register)
 
-// // router.route('/login')
-// //   .post(users.login)
-	
+router.route('/login').post(users.login)
 
-// // Gets the admin users
-
-// // router.route('/users')
-// //   .get(admin.show)
-
-// module.exports = router
-
-
+module.exports = router

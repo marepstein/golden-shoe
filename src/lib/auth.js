@@ -21,7 +21,6 @@ class Auth {
   static isAuthorized() {
     return this.getToken()
   }
-
 }
 
 export default Auth

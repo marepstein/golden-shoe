@@ -3,7 +3,6 @@ import axios from 'axios'
 import Auth from '../lib/auth'
 import UserContext from './UserContext'
 
-
 const initialLoginState = {
   email: '',
   password: ''
@@ -13,11 +12,10 @@ const errorInitialState = {
   errors: ''
 }
 
-const Login = (props) => {
-
+const Login = props => {
   const [form, updateForm] = useState(initialLoginState)
   const [error, setError] = useState(errorInitialState)
-  const { userInfo, setUserInfo } = useContext(UserContext)
+  const { setUserInfo } = useContext(UserContext)
 
   function handleInput(e) {
     updateForm({ ...form, [e.target.name]: e.target.value })
@@ -28,22 +26,24 @@ const Login = (props) => {
   function handleSubmit(e) {
     e.preventDefault()
     if (!form) return
-    axios.post('/api/login', form, { headers: { 'Authorization': '' } })
+    axios
+      .post('/api/login', form, { headers: { Authorization: '' } })
       .then(resp => {
         Auth.setToken(resp.data.token)
-        console.log(resp.data.token)
-        // setUserInfo(resp.data)
+        console.log(resp.data.user)
+        setUserInfo(resp.data.user)
         props.history.push('/cart')
       })
       .catch(() => setError({ errors: 'Email or Password Incorrect' }))
   }
-	
 
   return (
     <section className="section" id="login-pg">
       <div className="container has-text-centered" style={{ paddingTop: 120 }}>
-        <div className="title is-size-2-mobile" style={{ fontSize: 100 }}>Login</div>
-        <form className="form" onSubmit={(e) => handleSubmit(e)}>
+        <div className="title is-size-2-mobile" style={{ fontSize: 100 }}>
+          Login
+        </div>
+        <form className="form" onSubmit={e => handleSubmit(e)}>
           <div className="field">
             <label htmlFor="" className="label">
               Email
@@ -69,18 +69,15 @@ const Login = (props) => {
                 className="input"
               />
             </div>
-            {error.errors && <small className="help is-danger">
-              {error.errors}
-            </small>}
+            {error.errors && (
+              <small className="help is-danger">{error.errors}</small>
+            )}
           </div>
-          <button className="button is-black">
-            Login
-          </button>
+          <button className="button is-black">Login</button>
         </form>
       </div>
     </section>
   )
 }
-
 
 export default Login

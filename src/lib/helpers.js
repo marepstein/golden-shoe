@@ -1,3 +1,8 @@
+export const removeDuplicates = (myArr, prop) => {
+  return myArr.filter((obj, pos, arr) => {
+    return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos
+  })
+}
 
 export const addItem = (item, next) => {
   let cart = []
@@ -6,25 +11,21 @@ export const addItem = (item, next) => {
     if (localStorage.getItem('cart')) {
       cart = JSON.parse(localStorage.getItem('cart'))
     }
-		
-    if (item.quantity >= 1) {
+
+    if (item) {
       cart.push({
-        ...item, 
+        ...item,
         count: 1
       })
-			
     }
-    
-    // to avoid duplicated item when pressing add to cart twice (new Set removes the duplicates)
 
-    cart = Array.from(new Set(cart.map((product) => (product._id)))).map(id => {
+    cart = Array.from(new Set(cart.map(product => product._id))).map(id => {
       return cart.find(product => product._id === id)
     })
 
     localStorage.setItem('cart', JSON.stringify(cart))
     next()
   }
-	
 }
 
 export const itemTotal = () => {
@@ -33,9 +34,8 @@ export const itemTotal = () => {
       return JSON.parse(localStorage.getItem('cart')).length
     }
     return 0
-  } 
+  }
 }
-
 
 export const getCart = () => {
   if (typeof window !== 'undefined') {
@@ -46,24 +46,7 @@ export const getCart = () => {
   }
 }
 
-// function that searches for the cart item by ID and sets the count to the number set 
-export const updateItem = (productId, count) => {
-  let cart = []
-  if (typeof window !== 'undefined') {
-    if (localStorage.getItem('cart')) {
-      cart = JSON.parse(localStorage.getItem('cart'))
-    }
-    cart.map((product, i) => {
-      if (product._id === productId) {
-        cart[i].count = count 
-      }
-    })
-    localStorage.setItem('cart', JSON.stringify(cart))
-  }
-}
-
-
-export const removeItem = (productId) => {
+export const removeItem = productId => {
   let cart = []
   if (typeof window !== 'undefined') {
     if (localStorage.getItem('cart')) {
@@ -79,3 +62,8 @@ export const removeItem = (productId) => {
   return cart
 }
 
+export const clearCart = () => {
+  localStorage.setItem('cart', JSON.stringify([]))
+
+  return []
+}

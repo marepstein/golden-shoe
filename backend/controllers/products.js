@@ -1,41 +1,15 @@
+const ObjectID = require('mongodb').ObjectID
 const Product = require('../models/Products')
 
-// function create(req, res) {
-//   req.body.user = req.currentUser
-//   Product
-//     .create(req.body)
-//     .then(product => res.status(201).json(product))
-//     .catch(err => console.log(err))
-// }
-
-function productById (req, res, next) {
-  Product
-    .findById(req.params.id)
-    .then(product => {
-      if (!product) 
-        return res.status(400).json({ message: 'Product not found' })
-      else res.status(200).json(product)
-      next()
-    })
-    .catch(err => console.log(err))
-}
-
 function index(req, res) {
-
-  // const order = req.query.order ? req.query.order : 'asc'
-  // const sortBy = req.query.sortBy ? req.query.sortBy : '_id'
-
-  Product
-    .find()
+  Product.find()
     .populate('user')
-    // .sort([[sortBy, order]])
     .then(products => res.status(200).json(products))
     .catch(err => console.log(err))
 }
 
-function show(req, res,) {
-  Product
-    .findById(req.params.id)
+function show(req, res) {
+  Product.find({ productCode: req.params.id })
     .then(product => {
       console.log('My product is', product.name)
       if (!product) res.status(404).json({ message: '404 Not found' })
@@ -44,47 +18,36 @@ function show(req, res,) {
     .catch(err => console.log(err))
 }
 
-function createReview (req, res) {
-  req.body.user = req.currentUser
-  Product
-    .findById(req.params.id)
-    .populate('reviews.user')
+function productById(req, res, next) {
+  Product.findById(req.params.id)
     .then(product => {
-      if (!product) return res.status(404).json({ message: 'Not Found' })
-      product.reviews.push(req.body)
-      return product.save()
+      if (!product)
+        return res.status(400).json({ message: 'Product not found' })
+      else res.status(200).json(product)
+      next()
     })
-    .then(product => res.status(201).json(product))
-    .catch(() => res.status(404).json({ message: 'Not Found' }))
+    .catch(err => console.log(err))
 }
 
-function deleteReview(req, res) {
-  Product
-    .findById(req.params.id)
-    .populate('comments.user')
-    .then(product => {
-      if (!product) return res.status(404).json({ message: 'Not Found' })
-      const comment = product.reviews.id(req.params.commentId)
-      comment.remove()
-      return product.save()
+function purchaseProducts(req, res) {
+  var documentIds = req.body.products.map(function(product) {
+    return ObjectID(product._id)
+  })
+
+  Product.updateMany(
+    { _id: { $in: documentIds } },
+    { $set: { status: 'sold' } }
+  ).then(() => {
+    Product.find({ _id: { $in: documentIds } }).then(products => {
+      console.log(products.map(product => product.status))
+      res.json(products)
     })
-    .then(product => res.status(200).json(product))
-    .catch(err => res.json(err))
+  })
 }
-
-
-/*** If we want to return to customers most popular and new arrivals 
- by quantity sold: /products?sortBy=sold&order=desc&limit=4
- by new: /products?sortBy=createdAt&order=desc&limit=4
- BUT if no params are sent i.e. just /products -- then return all
-***/
-
 
 module.exports = {
-  // create,
   index,
-  show, 
+  show,
   productById,
-  createReview,
-  deleteReview
+  purchaseProducts
 }

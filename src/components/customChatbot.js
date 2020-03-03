@@ -1,15 +1,13 @@
-import React, { useState } from 'react'
+import React from 'react'
 import ChatBot from 'react-simple-chatbot'
 
-
-const CustomChatbot = (props) => {
-
+const CustomChatbot = props => {
   const config = {
     width: '300px',
     height: '400px',
     floating: true
   }
-	
+
   const steps = [
     {
       id: 'Greet',
@@ -39,26 +37,26 @@ const CustomChatbot = (props) => {
           label: 'Order help',
           trigger: 'Asking for order number'
         },
-        { 
+        {
           value: 'Product Help',
           label: 'Product help',
           end: true
-        } 
+        }
       ]
     },
     {
-      id: 'Asking for order number', 
-      message: 'Please can I take your order number', 
+      id: 'Asking for order number',
+      message: 'Please can I take your order number',
       trigger: 'Waiting for order number'
-    }, 
+    },
     {
       id: 'Waiting for order number',
       user: true,
       trigger: 'Checking'
-    }, 
+    },
     {
       id: 'Checking',
-      message: 'Thanks, let me check my system', 
+      message: 'Thanks, let me check my system',
       trigger: 'Done'
     },
     {
@@ -67,9 +65,8 @@ const CustomChatbot = (props) => {
       end: true
     }
   ]
-	
+
   return <ChatBot steps={steps} {...config} />
 }
-
 
 export default CustomChatbot
