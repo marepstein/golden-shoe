@@ -1,3 +1,6 @@
+// We can use the map method to create a temporary array, then we use the indexOf method to see if we can find the same object inside of our map.
+// If we do, then we know it is a duplicate.
+
 export const removeDuplicates = (myArr, prop) => {
   return myArr.filter((obj, pos, arr) => {
     return arr.map(mapObj => mapObj[prop]).indexOf(obj[prop]) === pos

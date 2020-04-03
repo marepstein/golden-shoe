@@ -8,6 +8,7 @@ import UserContext from './UserContext'
 
 const Cart = props => {
   const [items, setItems] = useState([])
+  // to avoid infinite loop
   const [run, setRun] = useState(false)
   const { userInfo } = useContext(UserContext)
 
@@ -15,7 +16,7 @@ const Cart = props => {
     setItems(getCart())
   }, [run])
 
-  // pass run so that useEffect will only update component when run state changes i.e. remove product
+  // pass run so that useEffect runs when the item state changes e.g. if an item is removed!
 
   const showItems = items => {
     return (

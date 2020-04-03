@@ -30,11 +30,13 @@ function productById(req, res, next) {
 }
 
 function purchaseProducts(req, res) {
+  // Creating an array of the product Id's
   var documentIds = req.body.products.map(function(product) {
     return ObjectID(product._id)
   })
 
   Product.updateMany(
+    // The $in operator selects the documents where the value of a field equals any value in the specified array
     { _id: { $in: documentIds } },
     { $set: { status: 'sold' } }
   ).then(() => {

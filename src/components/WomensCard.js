@@ -5,7 +5,7 @@ import { removeItem } from '../lib/helpers'
 const WomensCard = ({
   results,
   showRemoveButton = false,
-  // default value of function
+  // default value of function allows for default values if no value or undefined is passed
   setRun = f => f,
   run = undefined,
   availableSizes
@@ -18,7 +18,7 @@ const WomensCard = ({
         <button
           onClick={() => {
             removeItem(results._id)
-            setRun(!run) // run useEffect in parent Cart
+            setRun(!run) // runs the useEffect in parent (Cart)
           }}
         >
           {' '}
@@ -47,6 +47,7 @@ const WomensCard = ({
           <div className="card-footer">
             <div className="rows is-multiline">
               <div className="row">
+                <div className="title">{results.name}</div>
                 <div className="subtitle">{results.price}</div>
                 <div className="subtitle">
                   Available Sizes - UK: {availableSizes.join(', ')}
